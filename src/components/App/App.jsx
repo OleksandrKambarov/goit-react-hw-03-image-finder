@@ -17,7 +17,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export class App extends Component {
+class App extends Component {
   state = {
     status: Status.IDLE,
     searchQuery: '',
