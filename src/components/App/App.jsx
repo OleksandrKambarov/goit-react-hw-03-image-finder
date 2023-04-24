@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchImg } from 'services/pixabay-api';
@@ -17,7 +17,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export default class App extends Component {
+export class App extends Component {
   state = {
     status: Status.IDLE,
     searchQuery: '',
@@ -131,3 +131,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;
