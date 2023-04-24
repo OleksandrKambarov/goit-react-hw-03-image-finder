@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import s from './ImageGalleryItem.module.css';
+import css from './ImageGalleryItem.module.css';
 
 export const ImageGalleryItem = ({ src, alt, onClick }) => {
   return (
-    <li className={s.imageGalleryItem}>
+    <li className={css.imageGalleryItem}>
       <img
         src={src}
         alt={alt}
-        className={s.imageGalleryItemImage}
+        className={css.imageGalleryItemImage}
         onClick={onClick}
       />
     </li>

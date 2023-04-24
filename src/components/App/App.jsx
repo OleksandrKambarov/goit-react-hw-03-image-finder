@@ -45,7 +45,7 @@ export default class App extends Component {
     fetchImg(query, page, PER_PAGE)
       .then(({ hits, totalHits }) => {
         if (hits.length === 0) {
-          return Promise.reject(new Error('Oops! Nothing found'));
+          return Promise.reject(new Error('Nothing found'));
         }
 
         this.setState(prevState => ({

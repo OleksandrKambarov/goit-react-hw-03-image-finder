@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import errorImg from 'img/error.png';
+import errorImg from 'img/no-results.png';
 import css from './ErrorSearch.module.css';
 
 export const ErrorSearch = ({ message }) => {
