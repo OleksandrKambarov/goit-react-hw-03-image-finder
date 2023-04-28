@@ -6,8 +6,8 @@ export const Loader = () => {
     <div className={css.loaderWrapper}>
       <BallTriangle
         color="#3f51b5"
-        height={300}
-        width={300}
+        height={100}
+        width={100}
         ariaLabel="loading"
       />
     </div>
