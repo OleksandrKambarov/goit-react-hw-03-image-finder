@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchImages } from 'services/pixabay-api';
+import { fetchImg } from 'services/pixabay-api';
 import { Searchbar } from 'components/Searchbar';
 import { ImageGallery } from 'components/ImageGallery';
 import { LoadMoreBtn } from 'components/LoadMoreBtn';
@@ -36,22 +36,26 @@ class App extends Component {
     if (prevQuery !== nextQuery) {
       await this.reset();
       this.setState({ status: Status.PENDING });
-
-      await fetchImages(nextQuery)
-        .then(({ hits, totalHits }) => {
-          if (hits.length === 0) {
-            return Promise.reject(new Error('Nothing found'));
-          }
-
-          this.setState(prevState => ({
-            images: [...prevState.images, ...hits],
-            totalHits,
-            status: Status.RESOLVED,
-          }));
-        })
-        .catch(error => this.setState({ error, status: Status.REJECTED }));
+      await this.fetchImages(nextQuery);
     }
   }
+
+  fetchImages = query => {
+    const { page } = this.state;
+    fetchImg(query, page, PER_PAGE)
+      .then(({ hits, totalHits }) => {
+        if (hits.length === 0) {
+          return Promise.reject(new Error('Oops! Nothing found'));
+        }
+
+        this.setState(prevState => ({
+          images: [...prevState.images, ...hits],
+          totalHits,
+          status: Status.RESOLVED,
+        }));
+      })
+      .catch(error => this.setState({ error, status: Status.REJECTED }));
+  };
 
   reset = () => {
     this.setState({ page: 1, images: [] });
@@ -62,7 +66,6 @@ class App extends Component {
     await this.incrementPage();
     this.fetchImages(query);
     this.scrollDown();
-    return;
   };
 
   incrementPage = () => {
