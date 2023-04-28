@@ -62,6 +62,7 @@ class App extends Component {
     await this.incrementPage();
     this.fetchImages(query);
     this.scrollDown();
+    return;
   };
 
   incrementPage = () => {
